@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FlickrSampleApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BPh-fw-Ku3">
+                                <rect key="frame" x="196.5" y="369" width="375" height="286"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="3yG-Z6-JVq"/>
+                                    <constraint firstAttribute="height" constant="286" id="mGf-hw-WPe"/>
+                                </constraints>
+                            </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="fws-Cp-Ael">
+                                <rect key="frame" x="261" y="704.5" width="246" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="242" id="r64-IA-IHu"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="timeIntervalSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="wZ0-1t-Uop"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ps7-s4-rFf">
+                                <rect key="frame" x="83" y="951" width="602" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D86-wE-QaU">
+                                <rect key="frame" x="351" y="899" width="66" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="DFv-4o-XCF"/>
+                                    <constraint firstAttribute="width" constant="66" id="Yv0-Oa-Ovc"/>
+                                </constraints>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="startButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V93-bJ-kec"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fws-Cp-Ael" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0pS-lr-stm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="D86-wE-QaU" secondAttribute="bottom" constant="95" id="3mU-3P-eTi"/>
+                            <constraint firstItem="ps7-s4-rFf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="63" id="F3W-ZY-fXV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ps7-s4-rFf" secondAttribute="trailing" constant="63" id="Hhs-7b-RhZ"/>
+                            <constraint firstItem="D86-wE-QaU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JEi-nX-Q7E"/>
+                            <constraint firstItem="BPh-fw-Ku3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="KOG-xs-Icd"/>
+                            <constraint firstItem="BPh-fw-Ku3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ROl-Dy-O8y"/>
+                            <constraint firstItem="fws-Cp-Ael" firstAttribute="top" secondItem="BPh-fw-Ku3" secondAttribute="bottom" constant="49.5" id="jNL-Tn-mIm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ps7-s4-rFf" secondAttribute="bottom" constant="52" id="pkt-YF-4Oy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="flickrImageView" destination="BPh-fw-Ku3" id="M3t-P5-zI3"/>
+                        <outlet property="timeIntervalLabel" destination="ps7-s4-rFf" id="3NN-7r-UGp"/>
+                        <outlet property="timeIntervalSlider" destination="fws-Cp-Ael" id="c9E-DI-c9I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="134.78260869565219" y="136.14130434782609"/>
+        </scene>
+    </scenes>
+</document>
