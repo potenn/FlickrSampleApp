@@ -20,6 +20,10 @@ SDWebImage : https://github.com/rs/SDWebImage
 HTTP networking library written in Swift.
 Alamofire : https://github.com/Alamofire/Alamofire
 
+# Process
+
+![Alt Text](https://github.com/potenn/FlickrSampleApp/blob/master/FlickrSampleApp_Thread_Process.png)
+
 # Usage
 
 if you request https://api.flickr.com/services/feeds/photos_public.gne?format=json, you receive responseString.
