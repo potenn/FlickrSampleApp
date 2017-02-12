@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var timeIntervalLabel: UILabel!
     
+
     // MARK: - IBAction Method
     @IBAction func timeIntervalSliderChanged(_ sender: Any) {
         let currentValue = Int(self.timeIntervalSlider.value)
@@ -27,30 +28,52 @@ class ViewController: UIViewController {
         
     }
     
+    /*
+     if you use all images from feeds of photos_public and canContinueLoad is true, you can get new images from feeds of photos_public.
+     */
     var canContinueLoad : Bool = true
+    
+    /*
+    if flickrImageArray has no data or is not ready yet, this canShowImage variable value is false
+     */
     var canShowImage : Bool = false
+    
+    /*
+     Num of flickrImageArray
+     */
     var count : Int = 0
     
+    
+    // index of flickrImageArray
     var idx : Int = 0
+    
+    // image Array for Flickr Images
     var flickrImageArray : [String] = []
     
+    /*
+     Feeds of photos_public API
+     Import 20 data for the current date (2017. 2. 12)
+     */
     let serverURL = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let currentValue = Int(self.timeIntervalSlider.value)
         self.timeIntervalLabel.text = "\(currentValue) Seconds"
+        
         // Do any additional setup after loading the view, typically from a nib.
         
     }
     
+    // MARK: - Start Digital Photo Album
     @IBAction func startButtonClicked(_ sender: Any) {
-        
         self.playImagesOfFlickr()
-        
     }
     
+    
+    // MARK: - Show Image Start
     func playImagesOfFlickr() -> Void{
         
         let timerInvalidate: Bool = false
@@ -74,13 +97,13 @@ class ViewController: UIViewController {
                         
                         if self.canShowImage{
                             
-                            //
+
                             if self.count > self.idx{
 
-                                    
                                     self.flickrImageView.sd_setImage(with: URL(string: self.flickrImageArray[self.idx])!, completed:{ (image, error, cacheType, imageURL) in
                                     
                                         // Perform operation.
+                                        
                                         //fade in
                                         UIView.animate(withDuration: 2.0, animations: {() -> Void in
                                             
@@ -92,12 +115,9 @@ class ViewController: UIViewController {
                                         })
                                         
                                     })
-                                    
-//                                    self.flickrImageView.sd_setImage(with: URL(string: self.flickrImageArray[self.idx])!)
                                 
                             }
                         }else{
-                            
                             print("Not Shown yet")
                         }
                     }
@@ -116,6 +136,8 @@ class ViewController: UIViewController {
             }
         })
     }
+    
+    // MARK: - Get images from serverURL(https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1)
     
     func refreshFlickrImage() -> Void{
         
@@ -148,7 +170,6 @@ class ViewController: UIViewController {
                             
                             self.flickrImageArray.append(mediaDataURL!)
                             print(mediaDataURL!)
-                            
                             
                         }
                     }
