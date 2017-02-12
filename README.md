@@ -22,7 +22,7 @@ Alamofire : https://github.com/Alamofire/Alamofire
 
 # Process
 
-![Alt Text](https://github.com/potenn/FlickrSampleApp/blob/master/FlickrSampleApp_Thread_Process.png)
+![Alt Test](https://github.com/potenn/FlickrSampleApp/blob/master/process.png)
 
 # Usage
 
