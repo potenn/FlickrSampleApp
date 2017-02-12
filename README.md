@@ -32,7 +32,7 @@ so, if you want to use directly responseJSON, use the below API.
 https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1
 
 In this iOS application, we use only "media" key
-
+(we receive 20 json data when we request Flickr API.)
 ```javascript
 {
 title: "Uploads from everyone",
