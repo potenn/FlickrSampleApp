@@ -12,12 +12,20 @@ import SDWebImage
 
 class ViewController: UIViewController {
 
+    // MARK: - IBOutlet Object
     
     @IBOutlet weak var flickrImageView: UIImageView!
     
     @IBOutlet weak var timeIntervalSlider: UISlider!
     
     @IBOutlet weak var timeIntervalLabel: UILabel!
+    
+    // MARK: - IBAction Method
+    @IBAction func timeIntervalSliderChanged(_ sender: Any) {
+        let currentValue = Int(self.timeIntervalSlider.value)
+        self.timeIntervalLabel.text = "\(currentValue) Seconds"
+        
+    }
     
     var canContinueLoad : Bool = true
     var canShowImage : Bool = false
@@ -27,15 +35,6 @@ class ViewController: UIViewController {
     var flickrImageArray : [String] = []
     
     let serverURL = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
-    
-    var isTimerStart : Bool = false
-    
-    
-    @IBAction func timeIntervalSliderChanged(_ sender: Any) {
-        let currentValue = Int(self.timeIntervalSlider.value)
-        self.timeIntervalLabel.text = "\(currentValue) Seconds"
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,15 +52,18 @@ class ViewController: UIViewController {
     }
     
     func playImagesOfFlickr() -> Void{
+        
         let timerInvalidate: Bool = false
         
         DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+            
             while !timerInvalidate {
-                
+
                 DispatchQueue.global(qos: .background).async(execute: {() -> Void in
                     
                     print("Thread Global")
-                    if(self.idx >= self.count){
+                    
+                    if self.idx >= self.count{
                         print("refreshFlickrImage")
                         self.idx = 0
                         self.canContinueLoad = true
@@ -70,26 +72,46 @@ class ViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         
-                        print("Thread Main \(self.idx)")
                         if self.canShowImage{
+                            
+                            //
                             if self.count > self.idx{
-                                
-                                self.flickrImageView.sd_setImage(with: URL(string: self.flickrImageArray[self.idx])!)
-                                self.idx = self.idx + 1
+
+                                    
+                                    self.flickrImageView.sd_setImage(with: URL(string: self.flickrImageArray[self.idx])!, completed:{ (image, error, cacheType, imageURL) in
+                                    
+                                        // Perform operation.
+                                        //fade in
+                                        UIView.animate(withDuration: 2.0, animations: {() -> Void in
+                                            
+                                            self.flickrImageView.alpha = 1.0
+                                            self.idx = self.idx + 1
+                                            
+                                        }, completion: {(_ finished: Bool) -> Void in
+                                            print("Show Image")
+                                        })
+                                        
+                                    })
+                                    
+//                                    self.flickrImageView.sd_setImage(with: URL(string: self.flickrImageArray[self.idx])!)
                                 
                             }
                         }else{
+                            
                             print("Not Shown yet")
                         }
-                        
-                        
                     }
-                    
                 })
+ 
+                print("Global Thread Sleep \(self.timeIntervalSlider.value) seconds")
+                Thread.sleep(forTimeInterval: TimeInterval(self.timeIntervalSlider.value + 2.0))
                 
+                //fade out
+                UIView.animate(withDuration: 1.0, animations: {() -> Void in
+                    print("Fade out Index \(self.index)");
+                    self.flickrImageView.alpha = 0.0
+                }, completion: { _ in })
                 
-                Thread.sleep(forTimeInterval: TimeInterval(self.timeIntervalSlider.value))
-                print("Thread Sleep")
                 
             }
         })
