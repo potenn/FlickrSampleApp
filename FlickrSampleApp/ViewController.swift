@@ -172,7 +172,7 @@ class ViewController: UIViewController {
                 print("Global Thread Sleep \(self.timeIntervalSlider.value) seconds")
                 /*
                  Thread.sleep plus 4.0
-                 Because each Animation(Show, Hide) has 1.0 seconds.
+                 Because each Animation(Show, Hide) has 2.0 seconds.
                  (show : 2 seconds, hide : 2 seconds)
                  */
                 Thread.sleep(forTimeInterval: TimeInterval(self.timeIntervalSlider.value + 4.0))
